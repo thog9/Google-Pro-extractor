@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "Thog · Google AI Pro Injector",
+  "version": "1.2.0",
+  "description": "Inject Google AI Pro free-trial offer tokens at Play checkout. UI supports EN / VI / 中文. Pairs with other Thog extractors.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://one.google.com/*",
+    "https://tokenized.play.google.com/*",
+    "https://play.google.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Thog · Google AI Pro Injector"
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://one.google.com/*"],
+      "js": ["relay.js"],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": ["https://one.google.com/*"],
+      "js": ["injector.js"],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": false
+    },
+    {
+      "matches": ["https://tokenized.play.google.com/*"],
+      "js": ["guard-lang.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": ["https://tokenized.play.google.com/*"],
+      "js": ["guard.js"],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true
+    }
+  ]
+}
